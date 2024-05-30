@@ -7,6 +7,9 @@ function App() {
   const [data, setData] = useState(db);
   const [cart, setCart] = useState([]);
 
+  function addToCart(item) {
+    setCart((prevCart) => [...prevCart, item]);
+  }
   return (
     <>
       <Header />
@@ -19,7 +22,7 @@ function App() {
               guitar={guitar}
               key={guitar.id}
               cart={cart}
-              setCart={setCart}
+              addToCart={addToCart}
             />
           ))}
         </div>
