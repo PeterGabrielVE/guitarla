@@ -13,8 +13,8 @@ function App() {
         <h2 className="text-center">Nuestra Colección</h2>
 
         <div className="row mt-5">
-          {data.map(() => (
-            <Guitar />
+          {data.map((guitar) => (
+            <Guitar guitar={guitar} key={guitar.id} />
           ))}
         </div>
       </main>
