@@ -21,18 +21,13 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header cart={cart} />
       <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
 
         <div className="row mt-5">
           {data.map((guitar) => (
-            <Guitar
-              guitar={guitar}
-              key={guitar.id}
-              cart={cart}
-              addToCart={addToCart}
-            />
+            <Guitar guitar={guitar} key={guitar.id} addToCart={addToCart} />
           ))}
         </div>
       </main>
