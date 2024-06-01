@@ -2,6 +2,7 @@ import { useMemo } from "react";
 
 export default function Header({
   cart,
+  clearCart,
   removeFromCart,
   decreaseQuantity,
   increaseQuantity,
@@ -99,7 +100,10 @@ export default function Header({
                         Total pagar:{" "}
                         <span className="fw-bold">${cartTotal}</span>
                       </p>
-                      <button className="btn btn-dark w-100 mt-3 p-2">
+                      <button
+                        className="btn btn-dark w-100 mt-3 p-2"
+                        onClick={clearCart}
+                      >
                         Vaciar Carrito
                       </button>
                     </>
