@@ -6,10 +6,13 @@ import { db } from "./data/db";
 function App() {
   const [data, setData] = useState(db);
   const [cart, setCart] = useState([]);
+  const MAX_ITEMS = 5;
+  const MIN_ITEMS = 1;
 
   function addToCart(item) {
     const itemExists = cart.findIndex((guitar) => guitar.id === item.id);
     if (itemExists >= 0) {
+      if (cart[itemExists].quantity >= MAX_ITEMS) return;
       const updateCart = [...cart];
       updateCart[itemExists].quantity++;
       setCart(updateCart);
@@ -22,9 +25,41 @@ function App() {
   function removeFromCart(id) {
     setCart((prevCart) => prevCart.filter((guitar) => guitar.id !== id));
   }
+
+  function increaseQuantity(id) {
+    const updatedCart = cart.map((item) => {
+      if (item.id === id && item.quantity < MAX_ITEMS) {
+        return {
+          ...item,
+          quantity: item.quantity + 1,
+        };
+      }
+      return item;
+    });
+    setCart(updatedCart);
+  }
+
+  function decreaseQuantity(id) {
+    console.log("hi");
+    const updatedCart = cart.map((item) => {
+      if (item.id === id && item.quantity > MIN_ITEMS) {
+        return {
+          ...item,
+          quantity: item.quantity - 1,
+        };
+      }
+      return item;
+    });
+    setCart(updatedCart);
+  }
   return (
     <>
-      <Header cart={cart} removeFromCart={removeFromCart} />
+      <Header
+        cart={cart}
+        removeFromCart={removeFromCart}
+        increaseQuantity={increaseQuantity}
+        decreaseQuantity={decreaseQuantity}
+      />
       <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
 
